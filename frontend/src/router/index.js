@@ -1,22 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import contentMain from '../components/content'
+// import topPage from '../components/content'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'contentMain',
-    component: contentMain
+    name: 'topPage',
+    component: () => import('../views/TopPage')
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/form',
+    name: 'InputForm',
+    component: () => import('../views/InputForm.vue')
   }
 ]
 

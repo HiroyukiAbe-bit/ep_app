@@ -6,6 +6,10 @@ export function getVer() {
   return axios.get("/api/ver").then(res => res.data)
 }
 
+export function storeParticipant() {
+  return axios.post("/api/form/store").then(res => res.data)
+}
+
 
 //request.jsで接続する場合の記述法
 // export function getVer() {

@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('ver','API\VerController@index');
+
+Route::apiResource('form/store', 'API\ParticipantsController');

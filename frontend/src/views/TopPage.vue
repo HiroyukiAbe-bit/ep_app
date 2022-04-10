@@ -1,23 +1,7 @@
 <template>
   <v-container>
     <v-row class="text-center">
-      <v-col cols="12">
-        <v-carousel
-          :show-arrows="false"
-          cycle
-          height="400"
-          hide-delimiter-background
-          show-arrows-on-hover
-        >
-          <v-carousel-item
-            v-for="(item,i) in images"
-            :key="i"
-            :src="item.src"
-          >
-          </v-carousel-item>
-        </v-carousel>
-      </v-col>
-
+      <HeaderCarousel />
       <v-col cols="12">
         <h1 class="display-2 font-weight-bold mb-3">
           Happy Wedding
@@ -87,6 +71,7 @@
           x-large
           color="primary"
           dark
+          @click="InputFormPage"
         >
           リモート参加予約
         </v-btn>
@@ -97,16 +82,15 @@
 
 <script>
   import { getVer } from '@/api/Route'
+  import HeaderCarousel from '@/components/HeaderCarousel'
   export default {
-    name: 'contentMain',
+    name: 'TopPage',
     components: {
+      HeaderCarousel
     },
     async created() {
       const response = await getVer()
       console.log(response)
-    },
-    mounted () {
-      this.$refs.calendar.checkChange()
     },
     data: () => ({
       colors: [
@@ -116,20 +100,6 @@
         'red lighten-1',
         'deep-purple accent-4',
       ],
-      images: [
-        {
-          src: 'assets/image1.jpg',
-        },
-        {
-          src: 'assets/image4.png',
-        },
-        {
-          src: 'assets/image5.jpeg',
-        },
-        {
-          src: 'assets/image3.jpeg',
-        },
-      ],
       focus: '',
       events: [],
       colors2: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
@@ -137,48 +107,12 @@
       categories: ['John Smith', 'Tori Walker'],
     }),
     methods: {
-      getEventColor (event) {
-        return event.color
-      },
-      setToday () {
-        this.focus = ''
-      },
-      prev () {
-        this.$refs.calendar.prev()
-      },
-      next () {
-        this.$refs.calendar.next()
-      },
-      fetchEvents ({ start, end }) {
-        const events = []
-
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
-
-        for (let i = 0; i < eventCount; i++) {
-          const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
-          events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
-            color: this.colors2[this.rnd(0, this.colors2.length - 1)],
-            timed: !allDay,
-            category: this.categories[this.rnd(0, this.categories.length - 1)],
-          })
-        }
-
-        this.events = events
-      },
-      rnd (a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a
-      },
+      InputFormPage() {
+        this.$router.push({ name: 'InputForm'})
+      }
     }
   }
 </script>
+<style scoped>
+
+</style>
