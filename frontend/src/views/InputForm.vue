@@ -20,8 +20,11 @@
               md="5"
             >
               <v-text-field
-                v-model="formData.firstName"
+                v-model="form_data.first_name"
                 :counter="10"
+                :error="errors.first_name"
+                :error-messages="messages.first_name"
+                @keydown="clearError('first_name')"
                 label="First name"
                 required
               ></v-text-field>
@@ -32,8 +35,11 @@
               md="5"
             >
               <v-text-field
-                v-model="formData.lastName"
+                v-model="form_data.last_name"
                 :counter="10"
+                :error="errors.last_name"
+                :error-messages="messages.last_name"
+                @keydown="clearError('last_name')"
                 label="Last name"
                 required
               ></v-text-field>
@@ -44,7 +50,10 @@
               offset-md="1"
             >
               <v-text-field
-                v-model="formData.email"
+                v-model="form_data.email"
+                :error="errors.email"
+                :error-messages="messages.email"
+                @keydown="clearError('email')"
                 label="E-mail"
                 required
               ></v-text-field>
@@ -55,7 +64,10 @@
               offset-md="1"
             >
               <v-text-field
-                v-model="formData.lineId"
+                v-model="form_data.line_id"
+                :error="errors.line_id"
+                :error-messages="messages.line_id"
+                @keydown="clearError('line_id')"
                 label="Line-ID"
                 required
               ></v-text-field>
@@ -67,10 +79,13 @@
             >
               <v-select
                 item-text="text"
+                :error="errors.partici_number"
+                :error-messages="messages.partici_number"
+                @keydown="clearError('partici_number')"
                 :items="items"
                 label="当日の参加方法"
                 solo
-                v-model="formData.wayToParticipate"
+                v-model="way_to_participate"
               ></v-select>
             </v-col>
             <v-col
@@ -95,26 +110,45 @@
 <script>
 import HeaderCarousel from '@/components/HeaderCarousel'
 import { storeParticipant } from '@/api/Route'
+const PC = 'パソコン'
+const SMART_PHONE = 'スマートフォン'
+const TABLET = 'タブレット'
 export default {
+  
   name: 'InputForm',
   components: {
     HeaderCarousel
   },
   data: () => ({
     valid: false,
-    formData: {
-      firstName: '',
-      lastName: '',
+    form_data: {
+      first_name: '',
+      last_name: '',
       email: '',
-      lineId: '',
-      wayToParticipate: '',
-      particiNumber: null
+      line_id: '',
+      partici_number: null
     },
+    way_to_participate: '',
     items: [
-      {id:1, text: 'パソコン'},
-      {id:2, text: 'スマートフォン'},
-      {id:3, text: 'タブレット'}
+      {id:1, text: PC },
+      {id:2, text: SMART_PHONE },
+      {id:3, text: TABLET }
     ],
+    // エラー情報初期化
+    errors: {
+      first_name: false,
+      last_name: false,
+      email: false,
+      line_id: false,
+      partici_number: false,
+    },
+    messages: {
+      first_name: null,
+      last_name: null,
+      email: null,
+      line_id: null,
+      partici_number: null,
+    },
     nameRules: [
       v => !!v || '名前は必ず入力してください',
       v => v.length <= 10 || '名前は10文字以内で入力してください',
@@ -129,13 +163,32 @@ export default {
   }),
   methods: {
     async submitForm() {
-      const response = await storeParticipant(this.formData)
-      console.log(response)
+      Object.keys(this.errors).forEach((key) => {
+        this.errors[key] = false;
+        this.messages[key] = null;
+      })
+      switch(this.way_to_participate) {
+        case PC: this.form_data.partici_number = 1; break
+        case SMART_PHONE: this.form_data.partici_number = 2; break;
+        case TABLET : this.form_data.partici_number = 3; break
+      }
 
-
-      console.log(this.wayToParticipate)
-      // console.log(this.$refs.form.validate())
-    }
+      const response = await storeParticipant(this.form_data)
+      if (response.status === 400) {
+        Object.keys(response.errors).forEach((key) => {
+          this.errors[key] = true;
+          this.messages[key] = response.errors[key];
+        })
+      } else {
+        //成功した時の処理
+        alert('成功しました')
+      }
+    },
+    // 各エラーのリセット
+    clearError(item) {
+      this.errors[item] = false;
+      this.messages[item] = null;
+    },
   }
 }
 </script>

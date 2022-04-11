@@ -6,8 +6,8 @@ export function getVer() {
   return axios.get("/api/ver").then(res => res.data)
 }
 
-export function storeParticipant() {
-  return axios.post("/api/form/store").then(res => res.data)
+export function storeParticipant(params) {
+  return axios.post("/api/form/store", params).then(res => res.data).catch((error) => { console.log(error.response) })
 }
 
 

@@ -30,7 +30,7 @@ class ValidFormRequest extends FormRequest
             'last_name' => 'required|max:10',
             'email' => 'required',
             'line_id' => 'required',
-            'particiNumber' => 'required',
+            'partici_number' => 'required',
         ];
     }
 
@@ -43,7 +43,7 @@ class ValidFormRequest extends FormRequest
             'last_name.max' => ':attributeは10文字以内で入力してください。',
             'email.required' => ':attributeは必ず入力してください。',
             'line_id.required' => ':attributeはは必ず入力してください。',
-            'particiNumber.required' => ':attributeは1つ必ず選択してください。',
+            'partici_number.required' => ':attributeは1つ必ず選択してください。',
         ];
     }
 
@@ -54,7 +54,7 @@ class ValidFormRequest extends FormRequest
             'last_name' => 'LastName',
             'email' => 'E-mail',
             'line_id' => 'LineID',
-            'particiNumber' => '参加方法',
+            'partici_number' => '参加方法',
         ];
     }
 

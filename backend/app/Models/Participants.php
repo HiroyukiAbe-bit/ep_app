@@ -11,6 +11,6 @@ class Participants extends Model
         'last_name',
         'email',
         'line_id',
-        'particiNumber'
+        'partici_number'
     ];
 }
