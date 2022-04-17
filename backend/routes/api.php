@@ -20,3 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('ver','API\VerController@index');
 
 Route::apiResource('form/store', 'API\ParticipantsController');
+
+
+Route::post('/login', 'Api\AuthController@login');
+
+// ユーザー情報と、ログアウトは認証あり
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/me', 'Api\AuthController@me');
+    Route::post('/logout', 'Api\AuthController@logout');
+});

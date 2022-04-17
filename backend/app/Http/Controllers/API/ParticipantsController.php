@@ -31,8 +31,6 @@ class ParticipantsController extends Controller
         $message = null;
 
         $data = $request->all();
-        \Log::debug('### data中身');
-        \Log::debug($data);
         $participant = new Participants();
         $participant->fill($data)->save();
 
