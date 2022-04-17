@@ -1,19 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import topPage from '../components/content'
-
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'topPage',
+    name: 'TopPage',
     component: () => import('../views/TopPage')
   },
   {
     path: '/form',
     name: 'InputForm',
     component: () => import('../views/InputForm.vue')
+  },
+  {
+    path: '/admin',
+    name: 'AdminPage',
+    component: () => import('../views/AdminPage.vue')
+  },
+  {
+    path: '/admin/index',
+    name: 'AdminIndex',
+    component: () => import('../views/AdminIndex.vue')
   }
 ]
 

@@ -4,15 +4,13 @@
       <HeaderCarousel />
       <v-col cols="12">
         <h1 class="display-2 font-weight-bold mb-3">
-          Form
+          リモート参加予約
         </h1>
       </v-col>
       <v-col 
         cols="12"
       >
-        <v-form 
-          v-model="valid"
-        >
+        <v-form>
           <v-row>
             <v-col
               cols="12"
@@ -20,6 +18,8 @@
               md="5"
             >
               <v-text-field
+                :disabled="input_status"
+                :loading="loading"
                 v-model="form_data.first_name"
                 :counter="10"
                 :error="errors.first_name"
@@ -35,6 +35,8 @@
               md="5"
             >
               <v-text-field
+                :disabled="input_status"
+                :loading="loading"
                 v-model="form_data.last_name"
                 :counter="10"
                 :error="errors.last_name"
@@ -50,6 +52,8 @@
               offset-md="1"
             >
               <v-text-field
+                :disabled="input_status"
+                :loading="loading"
                 v-model="form_data.email"
                 :error="errors.email"
                 :error-messages="messages.email"
@@ -64,6 +68,8 @@
               offset-md="1"
             >
               <v-text-field
+                :disabled="input_status"
+                :loading="loading"
                 v-model="form_data.line_id"
                 :error="errors.line_id"
                 :error-messages="messages.line_id"
@@ -78,6 +84,8 @@
               offset-md="1"
             >
               <v-select
+                :disabled="input_status"
+                :loading="loading"
                 item-text="text"
                 :error="errors.partici_number"
                 :error-messages="messages.partici_number"
@@ -89,6 +97,28 @@
               ></v-select>
             </v-col>
             <v-col
+              cols="12"
+              offset-md=4
+            > 
+              <v-alert
+                type="success"
+                transition="scale-transition"
+                :value="alertBox"
+              >予約完了しました</v-alert>
+            </v-col>
+            <v-col v-if="form_data.input_status"
+              cols="12"
+            >
+              <v-btn
+                x-large
+                color="primary"
+                dark
+                @click="backTopPage()"
+              >
+                戻る
+              </v-btn>
+            </v-col>
+            <v-col v-else
               cols="12"
             >
               <v-btn
@@ -120,7 +150,10 @@ export default {
     HeaderCarousel
   },
   data: () => ({
-    valid: false,
+    loading: false,
+    input_status: false,
+    alertBox: false,
+    app: {},
     form_data: {
       first_name: '',
       last_name: '',
@@ -149,20 +182,15 @@ export default {
       line_id: null,
       partici_number: null,
     },
-    nameRules: [
-      v => !!v || '名前は必ず入力してください',
-      v => v.length <= 10 || '名前は10文字以内で入力してください',
-    ],
-    emailRules: [
-      // lineId => !lineId || 'emailかLineIDはどちらかの入力が必須です',
-      v => /.+@.+/.test(v) || 'email形式で入力してください',
-    ],
-    lineIdRules: [
-      email => !email || 'emailかLineIDはどちらかの入力が必須です'
-    ],
   }),
+  mounted() {
+    const app = localStorage.app
+    if (app) this.form_data = JSON.parse(app)
+    if (this.form_data.input_status) this.input_status = true
+  },
   methods: {
     async submitForm() {
+      this.loading = true
       Object.keys(this.errors).forEach((key) => {
         this.errors[key] = false;
         this.messages[key] = null;
@@ -179,17 +207,47 @@ export default {
           this.errors[key] = true;
           this.messages[key] = response.errors[key];
         })
+
+        // emailのバリデーションに引っ掛かった時に、line_idも反応させる
+        let messageDiff = null
+        if (this.messages.email) {
+          messageDiff = this.messages.email.slice()
+          if (messageDiff.shift() === 'E-mailかLine-IDどちらかは必ず入力してください。') {
+            this.errors.line_id = true
+            this.$set(this.messages, 'line_id', this.messages.email[0])
+          }  
+        }
       } else {
         //成功した時の処理
-        alert('成功しました')
+        this.alertDisable()
+        this.form_data.input_status = true
+        this.app = this.form_data
+        this.input_status = true
       }
+      this.loading = false
     },
     // 各エラーのリセット
     clearError(item) {
       this.errors[item] = false;
       this.messages[item] = null;
     },
-  }
+    backTopPage() {
+      this.$router.push({ name: 'TopPage'})
+    },
+    alertDisable() {
+      this.alertBox = true
+      setTimeout(() => {this.alertBox = false}, 5000);
+    }
+  },
+  watch: {
+    app: {
+      handler: function(newState) {
+        localStorage.app = JSON.stringify(newState)
+      },
+      deep: true
+    }
+  },
+
 }
 </script>
 

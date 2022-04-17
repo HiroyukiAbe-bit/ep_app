@@ -26,10 +26,10 @@ class ValidFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|max:10',
-            'last_name' => 'required|max:10',
-            'email' => 'required',
-            'line_id' => 'required',
+            'first_name' => 'required|regex:/^[ぁ-んァ-ヶー一-龠a-zA-Z]+$/|max:10',
+            'last_name' => 'required|regex:/^[ぁ-んァ-ヶー一-龠a-zA-Z]+$/|max:10',
+            'email' => 'nullable|required_without_all:email,line_id|email|max:255',
+            'line_id' => 'nullable|max:20|regex:/^[ a-zA-Z0-9_.]+$/',
             'partici_number' => 'required',
         ];
     }
@@ -38,12 +38,17 @@ class ValidFormRequest extends FormRequest
     {
         return [
             'first_name.required' => ':attributeは必ず入力してください。',
+            'first_name.regex' => ':attributeは文字で入力してください。',
             'first_name.max' => ':attributeは10文字以内で入力してください。',
+            'last_name.regex' => ':attributeは文字で入力してください。',
             'last_name.required' => ':attributeは必ず入力してください。',
             'last_name.max' => ':attributeは10文字以内で入力してください。',
-            'email.required' => ':attributeは必ず入力してください。',
-            'line_id.required' => ':attributeはは必ず入力してください。',
-            'partici_number.required' => ':attributeは1つ必ず選択してください。',
+            'email.required_without_all' => 'E-mailかLine-IDどちらかは必ず入力してください。',
+            'email.email' => ':attributeはE-mail形式で入力してください。',
+            'email.max' => ':attributeは255文字以内で入力してください。',
+            'line_id.max' => ':attributeは20文字以内で入力してください。',
+            'line_id.regex' => ':attributeはLineが許可した形式で入力してください。',
+            'partici_number.required' => ':attributeは必ず選択してください。',
         ];
     }
 
@@ -53,7 +58,7 @@ class ValidFormRequest extends FormRequest
             'first_name' => 'FirstName',
             'last_name' => 'LastName',
             'email' => 'E-mail',
-            'line_id' => 'LineID',
+            'line_id' => 'Line-ID',
             'partici_number' => '参加方法',
         ];
     }
@@ -69,6 +74,7 @@ class ValidFormRequest extends FormRequest
         $response['status']  = 400;
         $response['statusText'] = 'Failed validation.';
         $response['errors']  = $validator->errors();
+
         throw new HttpResponseException(
             response()->json( $response, 200 )
         );
