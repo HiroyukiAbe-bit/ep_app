@@ -5,27 +5,48 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field prepend-icon="mdi-account-circle" label="ユーザ名" />
+        <v-text-field v-model="login_form.name" prepend-icon="mdi-account-circle" label="ユーザ名" />
         <v-text-field 
+          v-model="login_form.password"
           v-bind:type="showPassword ? 'text' : 'password'"
           @click:append="showPassword = !showPassword"
           prepend-icon="mdi-lock"
           v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           label="パスワード" />
         <v-card-actions>
-         <v-btn class="info">ログイン</v-btn>
+         <v-btn class="info" @click="LoginSubmit()">ログイン</v-btn>
         </v-card-actions>
       </v-form>
     </v-card-text>
+    <v-alert v-if="faildLogin" type="error">
+      ユーザ名または、パスワードが正しくありません。
+    </v-alert>
   </v-card>
 </template>
 
 <script>
+import { login } from '@/api/Route'
 export default {
   name: 'App',
   data: () => ({
-    showPassword: false
-  })
+    faildLogin: false,
+    showPassword: false,
+    login_form: {
+      name: '',
+      password: ''
+    }
+  }),
+  methods :{
+  async LoginSubmit() {
+      const response = await login(this.login_form)
+      if (response.status == 401) {
+        this.faildLogin = true
+      } else {
+        localStorage.token = response.access_token
+        this.$router.push('/admin/index')
+      }
+    }
+  }
 }
 </script>
 

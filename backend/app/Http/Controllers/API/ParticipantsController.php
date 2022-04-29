@@ -16,7 +16,9 @@ class ParticipantsController extends Controller
      */
     public function index()
     {
-        //
+        $participant = Participants::with('how_to_watch')->get();
+        \Log::debug($participant);
+        return response()->json($participant);
     }
 
     /**

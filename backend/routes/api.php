@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('ver','API\VerController@index');
 
 Route::apiResource('form/store', 'API\ParticipantsController');
-
+Route::apiResource('/admin/index','API\ParticipantsController');
 
 Route::post('/login', 'Api\AuthController@login');
 
@@ -29,3 +29,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'Api\AuthController@me');
     Route::post('/logout', 'Api\AuthController@logout');
 });
+

@@ -11,6 +11,12 @@ class Participants extends Model
         'last_name',
         'email',
         'line_id',
-        'partici_number'
+        'how_to_watch_id'
     ];
+
+    public function how_to_watch()
+    {
+        return $this->belongsTo('App\Models\HowToWatch');
+    }
+    
 }
