@@ -1,14 +1,16 @@
 <template>
   <v-container>
     <v-row 
-      class="blue" 
+      class="primary" 
       style="height: 100px;"
       align-content="center"
     >
       <v-col cols="8">
         <h1
           class="white--text"
-        >参加者一覧</h1>
+        >
+        参加者一覧
+        </h1>
       </v-col>
       <v-col
         class="d-flex align-center flex-row-reverse"
@@ -17,6 +19,7 @@
         <v-btn
           depressed
           color="secondary"
+          @click="logout()"
         >
           ログアウト
         </v-btn>
@@ -36,9 +39,14 @@
 </template>
 
 <script>
-import { getParticipants } from '@/api/Route'
+import { getParticipants, logout } from '@/api/Route'
 export default {
   name: 'AdminIndex',
+  beforeCreate() {
+    if(localStorage.token === '') {
+      this.$router.push('/admin')
+    }
+  },
   async created() {
     const response = await getParticipants()
     this.list = response
@@ -52,7 +60,15 @@ export default {
       { text: 'line-ID', value: 'line_id' },
       { text: '参加方法', value: 'how_to_watch.name' },
     ],
-  })
+  }),
+  methods: {
+    async logout() {
+      localStorage.token = ''
+      const response = await logout()
+      console.log(response)
+      this.$router.push('/admin')
+    }
+  }
 }
 </script>
 

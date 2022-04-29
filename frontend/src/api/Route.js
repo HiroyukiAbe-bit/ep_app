@@ -18,6 +18,12 @@ export function getParticipants() {
   return axios.get("/api/admin/index").then(res => res.data).catch( error => error.response )
 }
 
+export function logout() {
+  return axios.post("/api/logout").then(res => res.data).catch( error => error.response )
+}
+
+
+
 
 //request.jsで接続する場合の記述法
 // export function getVer() {

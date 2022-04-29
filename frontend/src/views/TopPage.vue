@@ -81,17 +81,17 @@
 </template>
 
 <script>
-  import { getVer } from '@/api/Route'
+  // import { getVer } from '@/api/Route'
   import HeaderCarousel from '@/components/HeaderCarousel'
   export default {
     name: 'TopPage',
     components: {
       HeaderCarousel
     },
-    async created() {
-      const response = await getVer()
-      console.log(response)
-    },
+    // async created() {
+    //   const response = await getVer()
+    //   console.log(response)
+    // },
     data: () => ({
       colors: [
         'indigo',

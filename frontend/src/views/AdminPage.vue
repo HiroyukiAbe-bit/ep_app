@@ -14,12 +14,21 @@
           v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           label="パスワード" />
         <v-card-actions>
-         <v-btn class="info" @click="LoginSubmit()">ログイン</v-btn>
+         <v-btn class="primary" @click="LoginSubmit()">ログイン</v-btn>
+         <v-col class="d-flex align-center flex-row-reverse">
+           <v-btn
+            depressed
+            color="secondary"
+            @click="pageBack()"
+          >
+            戻る
+          </v-btn>
+         </v-col>
         </v-card-actions>
       </v-form>
     </v-card-text>
     <v-alert v-if="faildLogin" type="error">
-      ユーザ名または、パスワードが正しくありません。
+      ユーザ名、パスワードが正しくありません。
     </v-alert>
   </v-card>
 </template>
@@ -45,6 +54,9 @@ export default {
         localStorage.token = response.access_token
         this.$router.push('/admin/index')
       }
+    },
+    pageBack() {
+      this.$router.push('/')
     }
   }
 }
