@@ -1,32 +1,48 @@
 <template>
   <v-container>
-    <v-row 
-      class="primary" 
-      style="height: 100px;"
-      align-content="center"
-    >
-      <v-col cols="8">
-        <h1
-          class="white--text"
-        >
-        参加者一覧
-        </h1>
-      </v-col>
+    <v-row>
       <v-col
-        class="d-flex align-center flex-row-reverse"
-        cols="4"
+        offset-lg="2"
+        lg="8"
+        cols="12"
+      >
+        <v-row
+          class="primary"
         >
-        <v-btn
-          depressed
-          color="secondary"
-          @click="logout()"
-        >
-          ログアウト
-        </v-btn>
+          <v-col
+            class="d-flex align-center" 
+            style="height: 100px;"
+            align-content="center"
+            cols="10"
+          >
+            <h1
+              class="white--text"
+            >
+            参加者一覧
+            </h1>
+          </v-col>
+          <v-col
+            style="height: 100px;"
+            class="d-flex align-center flex-row-reverse"
+            cols="2"
+            >
+            <v-btn
+              depressed
+              color="secondary"
+              @click="logout()"
+            >
+              ログアウト
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12">
+      <v-col
+        cols="12"
+        offset-lg="2"
+        lg="8"
+      >
         <v-data-table
           :headers="headers"
           :items="list"
@@ -64,8 +80,7 @@ export default {
   methods: {
     async logout() {
       localStorage.token = ''
-      const response = await logout()
-      console.log(response)
+      await logout()
       this.$router.push('/admin')
     }
   }

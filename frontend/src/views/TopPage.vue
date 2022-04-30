@@ -2,7 +2,11 @@
   <v-container>
     <v-row class="text-center">
       <HeaderCarousel />
-      <v-col cols="12">
+      <v-col 
+        cols="12"
+        offset-lg="3"
+        lg="6"
+      >
         <h1 class="display-2 font-weight-bold mb-3">
           Happy Wedding
         </h1>
@@ -10,7 +14,7 @@
         <v-sheet
           color="white"
           elevation="15"
-          height="620"
+          height="650"
           width="auto"
         >
           <br>
@@ -36,7 +40,11 @@
 
         </v-sheet>
       </v-col>
-      <v-col cols="12">
+      <v-col 
+        cols="12"
+        offset-lg="3"
+        lg="6"
+      >
         <br>
         <br>
         <h2>Schedule</h2>

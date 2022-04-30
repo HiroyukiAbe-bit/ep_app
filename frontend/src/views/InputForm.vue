@@ -9,6 +9,8 @@
       </v-col>
       <v-col 
         cols="12"
+        offset-lg="2"
+        lg="8"
       >
         <v-form>
           <v-row>
@@ -87,9 +89,9 @@
                 :disabled="input_status"
                 :loading="loading"
                 item-text="text"
-                :error="errors.partici_number"
-                :error-messages="messages.partici_number"
-                @keydown="clearError('partici_number')"
+                :error="errors.how_to_watch_id"
+                :error-messages="messages.how_to_watch_id"
+                @keydown="clearError('how_to_watch_id')"
                 :items="items"
                 label="当日の参加方法"
                 solo
@@ -97,14 +99,19 @@
               ></v-select>
             </v-col>
             <v-col
-              cols="12"
-              offset-md=4
+              offset="2"
+              cols="8"
+              offset-md="2"
+              md="8"
             > 
               <v-alert
                 type="success"
                 transition="scale-transition"
                 :value="alertBox"
-              >予約完了しました</v-alert>
+                align-content="center"
+              >
+              予約完了しました
+              </v-alert>
             </v-col>
             <v-col v-if="form_data.input_status"
               cols="12"
@@ -159,7 +166,7 @@ export default {
       last_name: '',
       email: '',
       line_id: '',
-      partici_number: null
+      how_to_watch_id: null
     },
     way_to_participate: '',
     items: [
@@ -173,14 +180,14 @@ export default {
       last_name: false,
       email: false,
       line_id: false,
-      partici_number: false,
+      how_to_watch_id: false,
     },
     messages: {
       first_name: null,
       last_name: null,
       email: null,
       line_id: null,
-      partici_number: null,
+      how_to_watch_id: null,
     },
   }),
   mounted() {
@@ -196,9 +203,9 @@ export default {
         this.messages[key] = null;
       })
       switch(this.way_to_participate) {
-        case PC: this.form_data.partici_number = 1; break
-        case SMART_PHONE: this.form_data.partici_number = 2; break;
-        case TABLET : this.form_data.partici_number = 3; break
+        case PC: this.form_data.how_to_watch_id = 1; break
+        case SMART_PHONE: this.form_data.how_to_watch_id = 2; break;
+        case TABLET : this.form_data.how_to_watch_id = 3; break
       }
 
       const response = await storeParticipant(this.form_data)

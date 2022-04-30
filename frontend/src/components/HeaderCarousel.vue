@@ -1,5 +1,9 @@
 <template>
-  <v-col cols="12">
+  <v-col
+    cols="12"
+    offset-lg="2"
+    lg="8"
+  >
     <v-carousel
       :show-arrows="false"
       cycle
