@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(VerSeeder::class);
         $this->call(HowToWatchSeeder::class);
-        $this->call(ParticipantsSeeder::class);
+        // $this->call(ParticipantsSeeder::class);
 
     }
 }
