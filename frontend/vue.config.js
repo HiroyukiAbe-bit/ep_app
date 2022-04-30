@@ -35,7 +35,8 @@ module.exports = {
       app: {
           entry: 'src/main.js',
           template: 'templates/base.html',
-          filename: `../../resources/views/spa/app.blade.php`,
+          filename: '../../resources/views/spa/app.blade.php',
+          title: '結婚式参加予約アプリ',
       },
   },
 }

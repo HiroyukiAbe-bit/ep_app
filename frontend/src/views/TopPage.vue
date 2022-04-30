@@ -88,6 +88,9 @@
     components: {
       HeaderCarousel
     },
+    // beforeCreate() {
+    //   this.$router.push('/')
+    // },
     // async created() {
     //   const response = await getVer()
     //   console.log(response)
