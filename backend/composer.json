@@ -14,11 +14,13 @@
         "fruitcake/laravel-cors": "^3.0",
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "fzaninotto/faker": "^1.9"
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",
         "fakerphp/faker": "^1.9.1",
+        "fzaninotto/faker": "^1.4",
         "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
