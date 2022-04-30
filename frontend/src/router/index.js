@@ -9,6 +9,11 @@ const routes = [
     component: () => import('../views/TopPage')
   },
   {
+    path: '/index',
+    name: 'TopPage',
+    component: () => import('../views/TopPage')
+  },
+  {
     path: '/form',
     name: 'InputForm',
     component: () => import('../views/InputForm.vue')
