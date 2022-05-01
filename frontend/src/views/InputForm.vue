@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <HeaderCarousel />
       <v-col cols="12">
-        <h1 class="display-2 font-weight-bold mb-3">
+        <h1 class="text-sm-h3 text-md-h2">
           リモート参加予約
         </h1>
       </v-col>

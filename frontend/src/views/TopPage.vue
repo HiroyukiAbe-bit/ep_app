@@ -7,36 +7,35 @@
         offset-lg="3"
         lg="6"
       >
-        <h1 class="display-2 font-weight-bold mb-3">
+        <h1 class="text-sm-h3 text-md-h2">
           Happy Wedding
         </h1>
         <br>
         <v-sheet
           color="white"
           elevation="15"
-          height="650"
+          height="620"
           width="auto"
         >
           <br>
-          
-          <h2>Web招待状</h2>
+          <h2 class="text-sm-h4 text-md-h3">Web招待状</h2>
           <br>
-          <p>謹啓 〇〇の候（時候の挨拶）</p>
-          <p>皆様にはますます</p>
-          <p>ご清祥のこととお慶び申し上げます</p>
+          <p class="text-body-2 text-md-body-1">謹啓 〇〇の候（時候の挨拶）</p>
+          <p class="text-body-2 text-md-body-1">皆様にはますます</p>
+          <p class="text-body-2 text-md-body-1">ご清祥のこととお慶び申し上げます</p>
 
-          <p>この度 私たちは結婚式を挙げることになりました</p>
-          <p>つきましては 日ごろお世話になっている皆様に</p>
-          <p>お集まりいただき</p>
-          <p>ささやかな披露宴を催したいと存じます</p>
+          <p class="text-body-2 text-md-body-1">この度 私たちは結婚式を挙げることになりました</p>
+          <p class="text-body-2 text-md-body-1">つきましては 日ごろお世話になっている皆様に</p>
+          <p class="text-body-2 text-md-body-1">お集まりいただき</p>
+          <p class="text-body-2 text-md-body-1">ささやかな披露宴を催したいと存じます</p>
 
-          <p>ご多用中 誠に恐縮ではございますが</p>
-          <p>ご来臨の栄を賜りたく 謹んでご案内申し上げます</p>
-          <p>敬白</p>
+          <p class="text-body-2 text-md-body-1">ご多用中 誠に恐縮ではございますが</p>
+          <p class="text-body-2 text-md-body-1">ご来臨の栄を賜りたく 謹んでご案内申し上げます</p>
+          <p class="text-body-2 text-md-body-1">敬白</p>
 
-          <p>20●●年●月吉日</p>
-          <p>新郎名 阿部弘幸</p>
-          <p>新婦名 阿部悠香</p>
+          <p class="text-body-2 text-md-body-1">20●●年●月吉日</p>
+          <p class="text-body-2 text-md-body-1">新郎名 阿部弘幸</p>
+          <p class="text-body-2 text-md-body-1">新婦名 阿部悠香</p>
 
         </v-sheet>
       </v-col>
