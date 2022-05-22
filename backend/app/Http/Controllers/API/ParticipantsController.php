@@ -16,8 +16,7 @@ class ParticipantsController extends Controller
      */
     public function index()
     {
-        $participant = Participants::with('how_to_watch')->get();
-        \Log::debug($participant);
+        $participant = Participants::get();
         return response()->json($participant);
     }
 
@@ -68,8 +67,13 @@ class ParticipantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $params = $request->all();
+        for ($i = 0; $i < $params['count']; $i++) {
+            $max_id = Participants::max('id');
+            Participants::where('id', $max_id)->delete();
+        }
+
     }
 }

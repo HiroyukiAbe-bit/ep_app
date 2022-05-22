@@ -83,6 +83,7 @@
           リモート参加予約
         </v-btn>
       </v-col>
+      
     </v-row>  
   </v-container>
 </template>

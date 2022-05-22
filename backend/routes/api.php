@@ -21,6 +21,7 @@ Route::get('ver','API\VerController@index');
 
 Route::apiResource('form/store', 'API\ParticipantsController');
 Route::apiResource('/admin/index','API\ParticipantsController');
+Route::delete('form/destroy','API\ParticipantsController@destroy');
 
 Route::post('/login', 'API\AuthController@login');
 

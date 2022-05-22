@@ -27,7 +27,7 @@ const routes = [
     path: '/admin/index',
     name: 'AdminIndex',
     component: () => import('../views/AdminIndex.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({

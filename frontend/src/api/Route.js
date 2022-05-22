@@ -18,6 +18,10 @@ export function getParticipants() {
   return axios.get("/api/admin/index").then(res => res.data).catch( error => error.response )
 }
 
+export function participants_delete(param) {
+  return axios.delete("/api/form/destroy", {data: {count: param}}).then(res => res.data).catch( error => console.log(error.response) )
+}
+
 export function logout() {
   return axios.post("/api/logout").then(res => res.data).catch( error => error.response )
 }

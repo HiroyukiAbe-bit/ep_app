@@ -28,9 +28,12 @@ class ValidFormRequest extends FormRequest
         return [
             'first_name' => 'required|regex:/^[ぁ-んァ-ヶー一-龠a-zA-Z]+$/|max:10',
             'last_name' => 'required|regex:/^[ぁ-んァ-ヶー一-龠a-zA-Z]+$/|max:10',
-            'email' => 'nullable|required_without_all:email,line_id|email|max:255',
-            'line_id' => 'nullable|max:20|regex:/^[ a-zA-Z0-9_.]+$/',
-            'how_to_watch_id' => 'required',
+            'address' => 'required|max:100',
+            'tel' => 'required|regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/|max:20',
+            'prefecture' => 'required',
+            'allergy' => 'nullable',
+            'other_allergy' => 'nullable',
+            'attendance' => 'required',
         ];
     }
 
@@ -43,23 +46,27 @@ class ValidFormRequest extends FormRequest
             'last_name.regex' => ':attributeは文字で入力してください。',
             'last_name.required' => ':attributeは必ず入力してください。',
             'last_name.max' => ':attributeは10文字以内で入力してください。',
-            'email.required_without_all' => 'E-mailかLine-IDどちらかは必ず入力してください。',
-            'email.email' => ':attributeはE-mail形式で入力してください。',
-            'email.max' => ':attributeは255文字以内で入力してください。',
-            'line_id.max' => ':attributeは20文字以内で入力してください。',
-            'line_id.regex' => ':attributeはLineが許可した形式で入力してください。',
-            'how_to_watch_id.required' => ':attributeは必ず選択してください。',
+            'address.required' => ':attributeは必ず入力してください。',
+            'address.max' => ':attributeは100文字以内で入力してください。',
+
+            'tel.required' => ':attributeは必ず入力してください。',
+            'tel.regex' => ':attributeは○○○-□□□-△△△△の形式で入力してください。',
+            'tel.max' => ':attributeは20文字以内で入力してください。',
+            'prefecture.required' => ':attributeは必ず選択してください。', 
+            'attendance.required' => ':attributeは必ず選択してください。'
+
         ];
     }
 
     public function attributes()
     {
         return [
-            'first_name' => 'FirstName',
-            'last_name' => 'LastName',
-            'email' => 'E-mail',
-            'line_id' => 'Line-ID',
-            'how_to_watch_id' => '参加方法',
+            'first_name' => '名前',
+            'last_name' => '名字',
+            'address' => '住所',
+            'tel' => '電話番号',
+            'prefecture' => '都道府県',
+            'attendance' => 'ご出席・ご欠席'
         ];
     }
 
