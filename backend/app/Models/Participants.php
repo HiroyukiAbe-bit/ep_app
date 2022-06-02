@@ -13,7 +13,9 @@ class Participants extends Model
         'allergy',
         'tel',
         'prefecture',
-        'attendance'
+        'attendance',
+        'other_allergy',
+        'guest_type'
     ];
 
     // public function how_to_watch()

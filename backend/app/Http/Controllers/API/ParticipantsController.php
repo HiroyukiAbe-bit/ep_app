@@ -9,6 +9,15 @@ use App\Models\Participants;
 
 class ParticipantsController extends Controller
 {
+    const IS_ATTENDANCE_FLAG = 1;
+    const GROOM_FLAG = 1;
+
+    const IS_ATTENDANCE = '出席';
+    const NOT_ATTENDANCE = '欠席';
+
+    const GROOM = '新郎側';
+    const BRIDE = '新婦側';
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +25,23 @@ class ParticipantsController extends Controller
      */
     public function index()
     {
-        $participant = Participants::get();
-        return response()->json($participant);
+        $participants = Participants::all();
+
+        // DBの値を変換
+        foreach($participants as $participant) {
+            if ($participant->attendance === self::IS_ATTENDANCE_FLAG) {
+                $participant->attendance = self::IS_ATTENDANCE;
+            } else {
+                $participant->attendance = self::NOT_ATTENDANCE;
+            }
+            if ($participant->guest_type === self::GROOM_FLAG) {
+                $participant->guest_type = self::GROOM;
+            } else {
+                $participant->guest_type = self::BRIDE;
+            }
+        }
+
+        return response()->json($participants);
     }
 
     /**

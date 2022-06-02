@@ -7,7 +7,7 @@
     <v-carousel
       :show-arrows="false"
       cycle
-      height="400"
+      height="300"
       hide-delimiter-background
       show-arrows-on-hover
     >

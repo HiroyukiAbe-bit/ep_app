@@ -2,8 +2,6 @@
   <v-container>
     <v-row>
       <v-col
-        offset-lg="2"
-        lg="8"
         cols="12"
       >
         <v-row
@@ -40,8 +38,6 @@
     <v-row>
       <v-col
         cols="12"
-        offset-lg="2"
-        lg="8"
       >
         <v-data-table
           :headers="headers"
@@ -72,9 +68,13 @@ export default {
     headers: [
       { text: '苗字', value: 'last_name' },
       { text: '名前', value: 'first_name' },
-      { text: 'E-mail', value: 'email' },
-      { text: 'line-ID', value: 'line_id' },
-      { text: '参加方法', value: 'how_to_watch.name' },
+      { text: '都道府県', value: 'prefecture' },
+      { text: '住所', value: 'address' },
+      { text: '電話番号', value: 'tel' },
+      { text: 'アレルギー', value: 'allergy' },
+      { text: 'その他アレルギー', value: 'other_allergy' },
+      { text: 'ゲスト側', value: 'guest_type' },
+      { text: '出欠席', value: 'attendance' },
     ],
   }),
   methods: {

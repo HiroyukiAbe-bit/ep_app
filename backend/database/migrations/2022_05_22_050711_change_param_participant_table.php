@@ -23,6 +23,7 @@ class ChangeParamParticipantTable extends Migration
             $table->string('allergy')->nullable()->after('tel');
             $table->string('other_allergy')->nullable()->after('allergy');
             $table->boolean('attendance')->after('other_allergy');
+            $table->boolean('guest_type')->after('attendance');
         });
     }
 

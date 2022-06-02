@@ -2,28 +2,32 @@
   <v-container>
     <v-row class="text-center">
       <HeaderCarousel />
-      <v-col cols="12">
-        <h1 class="text-sm-h3 text-md-h2">
-          ご出席確認入力フォーム
-        </h1>
+      <v-col 
+        cols="12"
+        md="8"
+        offset-md="2"
+      >
+        <h2 class="map_head"><span>ご参列者様入力フォーム</span></h2>
       </v-col>
         <v-col 
         cols="10"
         offset="1"
+        md="6"
+        offset-md="3"
         >
           <v-radio-group
-            v-model="form_data.relation"
+            v-model="form_data.guest_type"
             row
           >
             <v-radio
               :disabled="input_status"
               label="新郎側ゲスト"
-              :value="0"
+              :value="true"
             ></v-radio>
             <v-radio
               :disabled="input_status"
               label="新婦側ゲスト"
-              :value="1"
+              :value="false"
             ></v-radio>
           </v-radio-group>
         </v-col>
@@ -112,7 +116,9 @@
                 color="primary"
                 @click="deleteForm()"
               >
-                <v-icon dark>
+                <v-icon dark
+                  v-if="input_status !== true"
+                >
                   mdi-minus
                 </v-icon>
               </v-btn>
@@ -223,33 +229,6 @@
               </v-radio-group>
             </v-col>
             <v-col
-              offset="2"
-              cols="8"
-              offset-md="2"
-              md="8"
-            > 
-              <v-alert
-                type="success"
-                transition="scale-transition"
-                :value="alertBox"
-                align-content="center"
-              >
-              予約完了しました
-              </v-alert>
-            </v-col>
-            <v-col v-if="form_data.input_status"
-              cols="12"
-            >
-              <v-btn
-                x-large
-                color="primary"
-                dark
-                @click="backTopPage()"
-              >
-                戻る
-              </v-btn>
-            </v-col>
-            <v-col v-else
               cols="12"
               md="4"
               offset-md="4"
@@ -258,17 +237,102 @@
                 x-large
                 color="primary"
                 dark
-                @click="submitForm()"
+                @click="confirm_dialog = true"
               >
-                以上の内容で予約する
+                以上の内容で登録する
               </v-btn>
             </v-col>
           </v-row>
         </v-form>
       </v-col>
     </v-row>
-  </v-container>
+    <v-dialog
+      v-model="limit_dialog"
+      width="500"
+    >
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          登録人数を絞ってください
+        </v-card-title>
+        <!-- 人数登録リミットダイアログ -->
+        <v-card-text>
+          <br>
+          連名登録登録可能な人数は6人までになります
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            text
+            @click="limit_dialog = false"
+          >
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- 人数登録リミットダイアログ end -->
 
+    <!-- 登録確認ダイアログ -->
+    <v-dialog
+      v-model="confirm_dialog"
+      persistent
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="text-h5">
+          確認
+        </v-card-title>
+        <v-card-text>
+          一度登録すると修正できません。<br>
+          登録してもよろしいですか？
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="confirm_dialog = false"
+          >
+            修正する
+          </v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="submitForm()"
+          >
+            登録する
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- 登録確認ダイアログ end -->
+
+    <!-- 登録完了ダイアログ -->
+    <v-dialog
+        v-model="regist_dialog"
+        transition="dialog-bottom-transition"
+        max-width="600"
+      >
+        <v-card>
+          <v-toolbar
+            color="primary"
+            dark
+          >登録が完了しました。</v-toolbar>
+          <v-card-text>
+            <div class="pa-12">当日お会いできることを楽しみにしております。</div>
+          </v-card-text>
+          <v-card-actions class="justify-end">
+            <v-btn
+              text
+              @click="backTopPage()"
+            >トップページへ戻る</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- 登録完了ダイアログ end -->
+
+  </v-container>
 </template>
 
 
@@ -290,6 +354,9 @@ export default {
     input_status: false,
     alertBox: false,
     first_name: '',
+    limit_dialog: false,
+    confirm_dialog: false,
+    regist_dialog: false,
     app: {},
     selected_allergies: [],
     form_data: {
@@ -300,7 +367,7 @@ export default {
       tel: '',
       allergy: '',
       other_allergy: '',
-      relation: 0,
+      guest_type: true,
       attendance: true,
     },
     way_to_participate: '',
@@ -383,11 +450,14 @@ export default {
   mounted() {
     const app = localStorage.app
     if (app) this.form_data = JSON.parse(app)
+    this.$set(this, 'first_name', this.form_data.first_name)
     if (this.form_data.input_status) this.input_status = true
+    if (this.form_data.input_status) this.regist_dialog = true
   },
   methods: {
     async submitForm() {
       this.loading = true
+      this.confirm_dialog = false
       Object.keys(this.errors).forEach((key) => {
         this.errors[key] = false;
         this.messages[key] = null;
@@ -436,10 +506,13 @@ export default {
 
         //成功した時の処理
         this.alertDisable()
-        this.form_data.first_name = this.first_name
+        this.$set(this.form_data,'first_name',this.first_name) 
         this.form_data.input_status = true
+        console.log(this.form_data)
         this.app = this.form_data
+        console.log(this.app)
         this.input_status = true
+        this.regist_dialog = true
       } catch (e) {
           console.log(e.message)
       }
@@ -471,6 +544,10 @@ export default {
       }
     },
     addForm () {
+      if(this.forms.length === 6) {
+        this.limit_dialog = true
+        return
+      }
       this.forms.push('')
     },
     deleteForm (index) {
@@ -493,5 +570,23 @@ export default {
   .content-center {
     display: flex;
     align-items: center;
+  }
+
+    .map_head span {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 18px;
+    text-transform: uppercase;
+
+  }
+
+  .map_head span::before {
+    content: '';
+    display: inline-block;
+    margin-right: 20px;
+    width: 40px;
+    height: 1px;
+    background-color: black;
   }
 </style>

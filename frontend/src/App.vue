@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-main>
+    <img class="bg_f" src='assets/bg.jpg'>
+    <v-main class="bg">
       <transition mode="out-in">
         <router-view/>
       </transition>
@@ -14,7 +15,6 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
   }),
 };
 </script>
@@ -40,4 +40,11 @@ export default {
   .v-leave-active {
     transition: all .5s 0s ease;
   }
+  .bg_f {
+    position: fixed; /* 要素の位置を固定する */
+    bottom: 0; /* 基準の位置を画面の一番下に指定する */
+    right: 0; /* 基準の位置を画面の一番右に指定する */
+    width: 400px; /* 幅を指定する */
+  }
+
 </style>
