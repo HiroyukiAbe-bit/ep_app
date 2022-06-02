@@ -31,7 +31,7 @@
         { src: 'assets/image1.jpg' },
         { src: 'assets/image4.png' },
         { src: 'assets/image5.jpeg' },
-        { src: 'assets/image3.jpeg' },
+        { src: 'assets/image3.jpg' },
       ]
     })
   }

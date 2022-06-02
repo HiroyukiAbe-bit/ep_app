@@ -16,22 +16,22 @@
           width="auto"
         >
           <br>
-          <p class="text-body-2 text-md-body-1">謹啓 〇〇の候（時候の挨拶）</p>
-          <p class="text-body-2 text-md-body-1">皆様にはますます</p>
-          <p class="text-body-2 text-md-body-1">ご清祥のこととお慶び申し上げます</p>
+          <p class="text-body-2 text-md-body-1">謹啓</p>
+          <p class="text-body-2 text-md-body-1">紫陽花が鮮やかに咲き誇る季節となりました</p>
+          <p class="text-body-2 text-md-body-1">皆様にはご清祥のこととお慶び申し上げます</p>
 
           <p class="text-body-2 text-md-body-1">この度 私たちは結婚式を挙げることになりました</p>
-          <p class="text-body-2 text-md-body-1">つきましては 日ごろお世話になっている皆様に</p>
-          <p class="text-body-2 text-md-body-1">お集まりいただき</p>
-          <p class="text-body-2 text-md-body-1">ささやかな披露宴を催したいと存じます</p>
+          <p class="text-body-2 text-md-body-1">つきましては 親しい皆様の</p>
+          <p class="text-body-2 text-md-body-1">末長いお力添えをいただきたく</p>
+          <p class="text-body-2 text-md-body-1">ささやかな宴を催したいと存じます</p>
 
           <p class="text-body-2 text-md-body-1">ご多用中 誠に恐縮ではございますが</p>
           <p class="text-body-2 text-md-body-1">ご来臨の栄を賜りたく 謹んでご案内申し上げます</p>
-          <p class="text-body-2 text-md-body-1">敬白</p>
+          <p class="text-body-2 text-md-body-1">謹白</p>
 
-          <p class="text-body-2 text-md-body-1">20●●年●月吉日</p>
-          <p class="text-body-2 text-md-body-1">新郎名 阿部弘幸</p>
-          <p class="text-body-2 text-md-body-1">新婦名 阿部悠香</p>
+          <p class="text-body-2 text-md-body-1">2022年6月5日 吉日</p>
+          <p class="text-body-2 text-md-body-1">新郎名 阿部 弘幸</p>
+          <p class="text-body-2 text-md-body-1 mr-3">新婦名 奥 悠香</p>
 
         </v-sheet>
       </v-col>
@@ -77,7 +77,9 @@
               <br>
               <p class="text-body-3 text-md-body-1 font-color">
                 結婚式会場:リストランテkubotsu<br>
-                〒810-0001 福岡県福岡市中央区天神2丁目5-55 4F</p>
+                〒810-0001 福岡県福岡市中央区天神2丁目5-55 4F<br>
+                TEL:092-724-0600
+              </p>
             </v-card-text>
           </v-card>
         </div>
@@ -88,7 +90,7 @@
         lg="6"
       >
         <h2 class="schedule_head"><span>開催日時</span></h2>
-        <b class="sample">7月23日 土曜日</b>
+        <b class="sample">2022年7月23日(土)</b>
       </v-col>
       <v-col 
         cols="12"
@@ -278,7 +280,7 @@
     position: relative;
     text-align: left;
     width: 30%;
-    background-color: #F06292;
+    background-color: #829ac8;
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -292,7 +294,7 @@
     position: absolute;
     top:calc(50% - 10px);
     right:-10px;
-    border-left: 10px solid #F06292;
+    border-left: 10px solid #829ac8;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
   }
@@ -320,10 +322,10 @@
     font-weight:bold;
     color: #FFF;
     text-shadow: 
-      0 0 0.05em #F06292,
-      0 0 0.10em #F06292,
-      0 0 0.15em #F06292,
-      0 0 0.30em #F06292;
+      0 0 0.05em #423a57,
+      0 0 0.10em #423a57,
+      0 0 0.15em #423a57,
+      0 0 0.30em #423a57;
     filter: saturate(80%);
   }
 
